@@ -1,5 +1,5 @@
 {
-  "name": "walletconnect-test-wallet",
+  "name": "eswallet",
   "version": "1.2.0",
   "private": true,
   "keywords": [
@@ -18,13 +18,7 @@
     "eject": "react-scripts-ts eject",
     "lint": "eslint -c './.eslintrc' --fix './src/**/*{.ts,.tsx}'"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/walletconnect/walletconnect-test-wallet.git"
-  },
-  "bugs": {
-    "url": "https://github.com/walletconnect/walletconnect-test-wallet/issues"
-  },
+
   "dependencies": {
     "@walletconnect/client": "^1.2.0",
     "@walletconnect/utils": "^1.2.0",
