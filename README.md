@@ -19,3 +19,4 @@ npm run test
 ```bash
 npm run build
 ```
+vercel
