@@ -4,7 +4,10 @@ import Dropdown from "../components/Dropdown";
 import { IChainData } from "../helpers/types";
 import { ellipseAddress, getViewportDimensions } from "../helpers/utilities";
 import { responsive } from "../styles";
+import Input from "./Input";
 import Blockie from "./Blockie";
+import Button from "./Button";
+import { getAppControllers } from "src/controllers";
 
 const SSection = styled.div`
   width: 100%;
@@ -24,6 +27,19 @@ const SAddressDropdownWrapper = styled.div`
   align-items: center;
 `;
 
+const SInput = styled(Input)`
+  width: 100%;
+  margin: 10px;
+  font-size: 14px;
+  height: 40px;
+`;
+
+const SButton = styled(Button)`
+  width: 25%;
+  height: 40px;
+  margin: 10px;
+`;
+
 interface IAccountDetailsProps {
   chains: IChainData[];
   updateAddress?: any;
@@ -39,16 +55,25 @@ const AccountDetails = (props: IAccountDetailsProps) => {
   const windowWidth = getViewportDimensions().x;
   const maxWidth = 468;
   const maxChar = 12;
+  const [key,setKey] = React.useState<string>('');
   const ellipseLength =
     windowWidth > maxWidth ? maxChar : Math.floor(windowWidth * (maxChar / maxWidth));
   const accountsMap = accounts.map((addr: string, index: number) => ({
     index,
     display_address: ellipseAddress(addr, ellipseLength),
   }));
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setKey(e.target.value );
+  };
+  const addWallet = async ()=>{
+    await getAppControllers().wallet.updateWallet(key, chainId);
+  }
   return (
     <React.Fragment>
       <SSection>
         <h6>{"Account"}</h6>
+        <SInput value={key} onChange={handleChange} placeholder={"Paste private key"} />
+        <SButton onClick={addWallet} >{`Add`}</SButton>
         <SAddressDropdownWrapper>
           <SBlockie size={40} address={address} />
           <Dropdown

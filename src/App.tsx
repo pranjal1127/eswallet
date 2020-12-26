@@ -110,6 +110,7 @@ export interface IAppState {
   scanner: boolean;
   connector: WalletConnect | null;
   uri: string;
+  key : string;
   peerMeta: {
     description: string;
     url: string;
@@ -135,6 +136,7 @@ export const INITIAL_STATE: IAppState = {
   scanner: false,
   connector: null,
   uri: "",
+  key: "",
   peerMeta: {
     description: "",
     url: "",
@@ -353,6 +355,7 @@ class App extends React.Component<{}> {
     await getAppConfig().events.update(this.state, this.bindedSetState);
   };
 
+
   public updateChain = async (chainId: number | string) => {
     await this.updateSession({ chainId: Number(chainId) });
   };
@@ -488,10 +491,11 @@ class App extends React.Component<{}> {
                       address={address}
                       activeIndex={activeIndex}
                       chainId={chainId}
-                      accounts={accounts}
+                      accounts={accounts} 
                       updateAddress={this.updateAddress}
                       updateChain={this.updateChain}
                     />
+
                     <SActionsColumn>
                       <SButton onClick={this.toggleScanner}>{`Scan`}</SButton>
                       {getAppConfig().styleOpts.showPasteUri && (

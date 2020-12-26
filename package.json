@@ -18,7 +18,7 @@
     "eject": "react-scripts-ts eject",
     "lint": "eslint -c './.eslintrc' --fix './src/**/*{.ts,.tsx}'"
   },
-
+  
   "dependencies": {
     "@walletconnect/client": "^1.2.0",
     "@walletconnect/utils": "^1.2.0",

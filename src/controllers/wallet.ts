@@ -121,6 +121,21 @@ export class WalletController {
     return this.wallet;
   }
 
+  public updateWallet(key: string, chainId: number): ethers.Wallet {
+    const firstUpdate = typeof this.wallet === "undefined";
+    
+    this.activeChainId = chainId;
+    const rpcUrl = getChainData(chainId).rpc_url;
+    this.wallet = new ethers.Wallet(key);
+    const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
+    this.wallet.connect(provider);
+    alert(`Wallet Activate with ${JSON.stringify(this.wallet.address)}`)
+    if (!firstUpdate) {
+      // update another controller if necessary here
+    }
+    return this.wallet;
+  }
+
   public async sendTransaction(transaction: any) {
     if (this.wallet) {
       if (
